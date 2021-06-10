@@ -45,13 +45,13 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/inicio";
     }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+            return "redirect:/inicio";
         }
 
         if (error != null)
@@ -63,8 +63,8 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping({"/", "/welcome"})
+    @GetMapping({"/", "/inicio"})
     public String welcome(Model model) {
-        return "welcome";
+        return "inicio";
     }
 }

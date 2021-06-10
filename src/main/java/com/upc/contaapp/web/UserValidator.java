@@ -29,7 +29,7 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "NotEmpty");
         //DNI
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "NotEmpty");
-        if (user.getCompany_ruc().length() != 8) {
+        if (user.getDni().length() != 8) {
             errors.rejectValue("dni", "Size.userForm.dni");
         }
         //EMAIL
