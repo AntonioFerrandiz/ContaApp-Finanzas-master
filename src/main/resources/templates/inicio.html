@@ -70,15 +70,10 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tipo de Moneda</span>
                                 </div>
                                 <div class="col">
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonMoneda" data-toggle="dropdown">
-                                            S/.
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonMoneda">
-                                            <a class="dropdown-item disabled">S/.</a> <a class="dropdown-item">$</a>
-                                        </div>
-                                    </div>
+                                    <select class="form-select" id="selectTipoMoneda">
+                                        <option value="1">S/.</option>
+                                        <option value="2">$</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +92,11 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tipo de Tasa</span>
                                 </div>
                                 <div class="col">
+                                    <select class="form-select" id="selectTipoTasa">
+                                        <option value="1">Efectiva</option>
+                                        <option value="2">Nominal</option>
+                                    </select>
+                                    <!--
                                     <div class="dropdown">
 
                                         <button class="btn btn-primary dropdown-toggle" type="button"
@@ -108,6 +108,7 @@
                                                 class="dropdown-item">Nominal</a>
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -120,6 +121,11 @@
                                     <span class="badge badge-default" style="font-size: 22px">Dias por año</span>
                                 </div>
                                 <div class="col">
+                                    <select class="form-select" id="selectTipoAño">
+                                        <option value="1">360 dias</option>
+                                        <option value="2">365 dias</option>
+                                    </select>
+                                    <!--
                                     <div class="dropdown">
 
                                         <button class="btn btn-primary dropdown-toggle" type="button"
@@ -131,6 +137,7 @@
                                                 class="dropdown-item">365 días</a>
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -143,6 +150,17 @@
                                     <span class="badge badge-default" style="font-size: 22px">Plazo de tasa</span>
                                 </div>
                                 <div class="col">
+                                    <select class="form-select" id="selectTipoPlazo">
+                                        <option value="1">Diario</option>
+                                        <option value="2">Quincenal</option>
+                                        <option value="3">Mensual</option>
+                                        <option value="4">Bimestral</option>
+                                        <option value="5">Trimestral</option>
+                                        <option value="6">Cuatrimestral</option>
+                                        <option value="7">Semestral</option>
+                                        <option value="8">Anual</option>
+                                    </select>
+                                    <!--
                                     <div class="dropdown">
 
                                         <button class="btn btn-primary dropdown-toggle" type="button"
@@ -161,6 +179,7 @@
                                             <a class="dropdown-item">Manual</a>
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -185,8 +204,11 @@
                                 <div class="col-sm-3">
                                     <span class="badge badge-default" style="font-size: 22px">Fecha de Descuento</span>
                                 </div>
-                                <div class="col">
-                                    <input type="date" id="startD" name="trip-start">
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="date" id="startD" name="dateD">
+                                </div>
+                                <div class="col-sm-3">
+
                                 </div>
                             </div>
                         </div>
@@ -195,6 +217,7 @@
                 </div>
             </div>
             <!--Fin de primer rectangulo-->
+            <!--Inicio de la linea entre los rectangulos-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -212,8 +235,9 @@
                                     <span class="badge badge-default" style="font-size: 22px">Fecha de Vencimiento</span>
                                 </div>
                                 <div class="col">
-                                    <input type="date" id="startV" name="trip-start">
+                                    <input class="form-control" type="date" id="startV" name="dateV">
                                 </div>
+
                             </div>
                         </div>
                         <!--Fin primera fila-->
@@ -250,7 +274,8 @@
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <input type="text" class="input-especial" name="fname" readonly="readonly" style="width: 650px; height: 75px;">
+                                <textarea class="form-control" aria-label="With textarea" readonly="readonly" id="textareainiciales" style="resize: none"></textarea>
+
                             </div>
                         </div>
                         <!--Fin tercera fila-->
@@ -287,13 +312,40 @@
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <input type="text" class="input-especial" name="fname" readonly="readonly" style="width: 650px; height: 75px;">
+                                <textarea class="form-control" aria-label="With textarea" readonly="readonly" id="textareafinales" style="resize: none"></textarea>
                             </div>
                         </div>
                         <!--Fin tercera fila-->
                     </div>
                 </div>
             </div>
+            <!--Inicio de la linea entre los rectangulos-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--Primera fila-->
+                        <div class="row1">
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <span class="badge badge-default" style="font-size: 22px">Valor Total a Recibir</span>
+                                </div>
+                                <div class="col">
+                                    <span class="badge badge-default" style="font-size: 22px">...</span>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <span class="badge badge-default" style="font-size: 22px">TCEA</span>
+                                </div>
+                                <div class="col">
+                                    <span class="badge badge-default" style="font-size: 22px">...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fin primera fila-->
+                    </div>
+                </div>
+            </div>
+            <!--Fin de la linea entre los rectangulos-->
             <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar Letra</button>
         </form>
         <!--Final de Costos Gastos Finales-->
