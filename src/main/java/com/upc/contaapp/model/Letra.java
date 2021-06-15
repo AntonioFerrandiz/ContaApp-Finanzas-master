@@ -1,15 +1,12 @@
 package com.upc.contaapp.model;
 
 import javax.persistence.*;
-import java.nio.DoubleBuffer;
-import java.util.List;
-import java.util.Set;
 import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
+
+
 
 @Entity
 @NoArgsConstructor

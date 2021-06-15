@@ -1,21 +1,148 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <title>Conta App+</title>
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script>
+
+        function NumDias() {
+            var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
+            var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
+            var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
+            if (document.getElementById("FechaVencimientoID")) {
+                return ndias;
+            }
+        }
+        var CostoGastoInicialArr = [];
+        function CostoGastoInicial(){
+            var CostoGastoI = document.getElementById("CostoGastoInicial").value;
+            if (!CostoGastoI) return;
+            document.getElementById('textareainiciales').append(CostoGastoI + ' + ');
+            CostoGastoInicialArr.push(parseFloat(CostoGastoI));
+            var TotalCostoGastoI = 0;
+            CostoGastoInicialArr.forEach(function (CostoGastoInicialArr){
+               TotalCostoGastoI += CostoGastoInicialArr;
+            });
+            document.getElementById('CostoGastoInicial').value = '';
+            return TotalCostoGastoI;
+        }
+
+        var CostoGastoFinalArr = [];
+        function CostoGastoFinal(){
+            var CostoGastoF = document.getElementById("CostoGastoFinal").value;
+            if (!CostoGastoF) return;
+            document.getElementById('textareafinales').append(CostoGastoF + ' + ');
+            CostoGastoFinalArr.push(parseFloat(CostoGastoF));
+            var TotalCostoGastoF = 0;
+            CostoGastoFinalArr.forEach(function (CostoGastoFinalArr){
+                TotalCostoGastoF += CostoGastoFinalArr;
+            });
+            document.getElementById('CostoGastoFinal').value = '';
+            return TotalCostoGastoF;
+        }
+
+        function TipoAño() {
+            //var TotalCostoGastoI = CostoGastoInicial();
+            //var TotalCostoGastoF = CostoGastoFinal();
+            var DiferenciaDias = NumDias();
+            var DiasAño = 0;
+            var TasaEfectivaAnual = document.getElementById("TasaEfectivaAnual").value;
+            var ValorNominal = document.getElementById("ValorNominal").value;
+            var r = document.getElementById("selectTipoAño").value;
+            if (r == 1) DiasAño = 360;
+            else if (r == 2) DiasAño = 365;
+            console.log(DiasAño);
+            console.log(DiferenciaDias);
+            console.log('TEA: '+TasaEfectivaAnual);
+            var TE = (Math.pow((1 + (TasaEfectivaAnual / 100)), (DiferenciaDias / DiasAño)) - 1);
+            console.log('TE: '+TE*100);
+            //var totalTCEA = (Math.pow((1 + (TasaEfectivaAnual / 100)), (DiferenciaDias / DiasAño)) - 1) * 100;
+            var d = ((TE)/((TE)+1));
+            console.log('d: '+d*100);
+            var Descuento = ValorNominal * d;
+            console.log('Descuento: '+Descuento);
+            var ValorNeto = ValorNominal - Descuento;
+            console.log('ValorNeto: ', ValorNeto);
+            //console.log('CostoGastoInicial: '+ TotalCostoGastoI);
+            //console.log('CostoGastoFinal: '+ TotalCostoGastoF);
+            var ValorRecibido = ValorNeto - parseFloat(87.6);
+            console.log("ValorRecibido",ValorRecibido);
+            var ValorEntregado = parseInt(ValorNominal) + parseFloat(0.70);
+            console.log("ValorEntregado:",ValorEntregado);
+            var TCEA = (Math.pow((ValorEntregado/ValorRecibido),(DiasAño/DiferenciaDias))-1);
+            document.getElementById("vtrds").innerHTML = ValorRecibido;
+            document.getElementById("tceads").innerHTML = TCEA*100+'%';
+        }
+
+        /*
+        if (diasaño === 1) {
+            console.log('360 dias');
+
+            function NumDiasOrdinario() {
+                var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
+                var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
+                var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
+                if (document.getElementById("FechaVencimientoID")) {
+                    //document.getElementById("tceads").innerHTML = ndias;
+                    //document.getElementById("numdays2").value=ndias;
+                    return ndias;
+                }
+            }
+        } else if (diasaño === 2) {
+
+            console.log('365 dias');
+
+            function NumDias() {
+                var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
+                var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
+                var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
+                if (document.getElementById("FechaVencimientoID")) {
+                    //document.getElementById("tceads").innerHTML = ndias;
+                    //document.getElementById("numdays2").value=ndias;
+                    return ndias;
+                }
+            }
+            var numerodias = NumDias();
+            //console.log(numerodias);
+            //var TEA = TasaEfectivaAnual();
+            var TEA = new Date(document.getElementById('TasaEfectivaAnual').value);
+            console.log(TEA);
+            function TE(NumeroDias, TasaEfectivaAnual) {
+                return (Math.pow((1 + (TasaEfectivaAnual / 100)), (NumeroDias / 365)) - 1);
+            }
+            var Te = TE(numerodias, TEA);
+            document.getElementById("tceads").innerHTML = Te;
+
+
+            //function TCEALetra() {
+            //    var totalTCEA = TE() + NumDias();
+            //    document.getElementById("tceads").innerHTML = totalTCEA;
+            //}
+
+            //console.log(Te);
+
+        } else {
+            console.log(':)');
+        }
+
+*/
+    </script>
 </head>
 
 <body style="background:#117da4">
 
 <section id="Home">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top mb-2" style="background-color: #032e58;">
-        <div class="container-fluid" >
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">CONTA APP +</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -27,7 +154,7 @@
                         <a class="nav-link" href="#">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" >Preguntas</a>
+                        <a class="nav-link" href="#" tabindex="-1">Preguntas</a>
                     </li>
                 </ul>
                 <div sec:authorize="isAuthenticated()">
@@ -42,6 +169,7 @@
 </section>
 
 <section id="Letra">
+
     <div id="content" class="p-4 p-md-5 pt-5 mt-4">
         <form method="POST" th:object="${letraForm}" th:action="@{/reportes}">
             <div class="container">
@@ -56,14 +184,14 @@
                                     <span class="badge badge-default" style="font-size: 22px">Grupo</span>
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="fname" placeholder="1">
+                                    <input type="text" name="gruponame">
                                 </div>
 
                                 <div class="col-sm-2">
                                     <span class="badge badge-default" style="font-size: 22px">Valor Nominal</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="fname" placeholder="1">
+                                    <input type="number" name="ValorNominal" id="ValorNominal" onchange="TipoAño()">
                                 </div>
 
                                 <div class="col-sm-2">
@@ -96,19 +224,6 @@
                                         <option value="1">Efectiva</option>
                                         <option value="2">Nominal</option>
                                     </select>
-                                    <!--
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonTasa" data-toggle="dropdown">
-                                            Efectiva
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonTasa">
-                                            <a class="dropdown-item disabled">Efectiva</a> <a
-                                                class="dropdown-item">Nominal</a>
-                                        </div>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
@@ -121,23 +236,12 @@
                                     <span class="badge badge-default" style="font-size: 22px">Dias por año</span>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" id="selectTipoAño">
+
+                                    <select class="form-select" id="selectTipoAño" onchange="TipoAño()">
+                                        <option value="0">-</option>
                                         <option value="1">360 dias</option>
                                         <option value="2">365 dias</option>
                                     </select>
-                                    <!--
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonAnio" data-toggle="dropdown">
-                                            360 días
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonAnio">
-                                            <a class="dropdown-item disabled">360 días</a> <a
-                                                class="dropdown-item">365 días</a>
-                                        </div>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
@@ -160,26 +264,6 @@
                                         <option value="7">Semestral</option>
                                         <option value="8">Anual</option>
                                     </select>
-                                    <!--
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonPlazo" data-toggle="dropdown">
-                                            Anual
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonPlazo">
-                                            <a class="dropdown-item disabled">Anual</a>
-                                            <a class="dropdown-item">Diario</a>
-                                            <a class="dropdown-item">Quincenal</a>
-                                            <a class="dropdown-item">Mensual</a>
-                                            <a class="dropdown-item">Bimestral</a>
-                                            <a class="dropdown-item">Trimestral</a>
-                                            <a class="dropdown-item">Cuatrimestral</a>
-                                            <a class="dropdown-item">Semestral</a>
-                                            <a class="dropdown-item">Manual</a>
-                                        </div>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
@@ -192,27 +276,24 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tasa efectiva</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="fname" placeholder="1">
+                                    <input type="number" name="fname" id="TasaEfectivaAnual" onchange="TipoAño()">
                                 </div>
                             </div>
-                        </div>
-                        <!--Fin cuarta fila-->
 
-                        <!--Quinta fila-->
-                        <div class="row2 mt-3">
                             <div class="form-group row">
                                 <div class="col-sm-3">
                                     <span class="badge badge-default" style="font-size: 22px">Fecha de Descuento</span>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control" type="date" id="startD" name="dateD">
+                                    <input class="form-control" type="date" id="FechaDescuentoID" name="dateD" onchange="TipoAño()">
                                 </div>
                                 <div class="col-sm-3">
 
                                 </div>
                             </div>
                         </div>
-                        <!--Fin quinta fila-->
+
+
                     </div>
                 </div>
             </div>
@@ -232,10 +313,11 @@
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <span class="badge badge-default" style="font-size: 22px">Fecha de Vencimiento</span>
+                                    <span class="badge badge-default"
+                                          style="font-size: 22px">Fecha de Vencimiento</span>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="date" id="startV" name="dateV">
+                                    <input class="form-control" type="date" id="FechaVencimientoID" name="dateV" onchange="TipoAño()">
                                 </div>
 
                             </div>
@@ -263,10 +345,10 @@
                                     <span class="badge badge-default" style="font-size: 22px">Costo-Gasto</span>
                                 </div>
                                 <div class="col-sm-auto">
-                                    <input type="number" name="fname">
+                                    <input type="number" name="CostoGastoInicial" id="CostoGastoInicial">
                                 </div>
                                 <div class="col-sm-auto">
-                                    <button type="button" class="btn btn-success btn-md">Agregar</button>
+                                    <button type="button" class="btn btn-success btn-md" onclick="TipoAño()">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +356,8 @@
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <textarea class="form-control" aria-label="With textarea" readonly="readonly" id="textareainiciales" style="resize: none"></textarea>
+                                <textarea class="form-control" aria-label="With textarea" readonly="readonly"
+                                          id="textareainiciales" style="resize: none"></textarea>
 
                             </div>
                         </div>
@@ -301,10 +384,10 @@
                                     <span class="badge badge-default" style="font-size: 22px">Costo-Gasto</span>
                                 </div>
                                 <div class="col-sm-auto">
-                                    <input type="number" name="fname">
+                                    <input type="number" name="CostoGastoFinal" id="CostoGastoFinal">
                                 </div>
                                 <div class="col-sm-auto">
-                                    <button type="button" class="btn btn-success btn-md">Agregar</button>
+                                    <button type="button" class="btn btn-success btn-md" onclick="TipoAño()">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +395,8 @@
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <textarea class="form-control" aria-label="With textarea" readonly="readonly" id="textareafinales" style="resize: none"></textarea>
+                                <textarea class="form-control" aria-label="With textarea" readonly="readonly"
+                                          id="textareafinales" style="resize: none" ></textarea>
                             </div>
                         </div>
                         <!--Fin tercera fila-->
@@ -327,17 +411,18 @@
                         <div class="row1">
                             <div class="form-group row">
                                 <div class="col-sm-3">
-                                    <span class="badge badge-default" style="font-size: 22px">Valor Total a Recibir</span>
+                                    <span class="badge badge-default"
+                                          style="font-size: 22px">Valor Total a Recibir</span>
                                 </div>
                                 <div class="col">
-                                    <span class="badge badge-default" style="font-size: 22px">...</span>
+                                    <span class="badge badge-default" style="font-size: 22px" id="vtrds">...</span>
                                 </div>
 
                                 <div class="col-sm-3">
                                     <span class="badge badge-default" style="font-size: 22px">TCEA</span>
                                 </div>
                                 <div class="col">
-                                    <span class="badge badge-default" style="font-size: 22px">...</span>
+                                    <span class="badge badge-default" style="font-size: 22px" id="tceads">...</span>
                                 </div>
                             </div>
                         </div>
@@ -353,16 +438,27 @@
 </section>
 
 
-  <!-- Copyright Section-->
-  <div class="copyright py-4 text-center text-white" style="background-color: #1a252f;">
-      <div class="container">Copyright &copy; UPC 2021</div>
-  </div>
+<!--<div id="numdays"><label class="form">Number of days:</label><input type="text" class="textbox" id="a" name="numdays"/></div>-->
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  <script src="/js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white" style="background-color: #1a252f;">
+    <div class="container">Copyright &copy; UPC 2021</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
 </body>
 </html>

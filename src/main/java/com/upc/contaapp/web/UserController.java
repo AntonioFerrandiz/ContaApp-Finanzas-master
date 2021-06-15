@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @GetMapping({"/", "/inicio"})
-    public String welcome(Model model) {
+    public String inicio(Model model) {
         return "inicio";
     }
 }
