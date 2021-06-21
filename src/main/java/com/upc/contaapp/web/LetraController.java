@@ -21,6 +21,7 @@ public class LetraController {
     @Autowired
     private LetraValidator letraValidator;
 
+
     @PostMapping("/inicio")
     public String addLetra(@ModelAttribute("letraForm") Letra letraForm, BindingResult bindingResult){
         letraValidator.validate(letraForm,bindingResult);

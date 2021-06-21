@@ -20,9 +20,9 @@ public class LetraValidator implements Validator{
     public void validate(Object o, Errors errors) {
         Letra letra = (Letra) o;
         //Valor Nominal
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "valornominal", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "valorN", "NotEmpty");
         if(letra.getValorN() <= 0){
-            errors.rejectValue("valornominal", "value.letraForm.valornominal");
+            errors.rejectValue("valorN", "value.letraForm.valorN");
         }
         //Tasa Efectiva
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tasaefectiva", "NotEmpty");

@@ -50,9 +50,97 @@
         function TipoAño() {
             //var TotalCostoGastoI = CostoGastoInicial();
             //var TotalCostoGastoF = CostoGastoFinal();
+            var select = document.getElementById('selectTipoMoneda');
+            var TipoMoneda = select.options[select.selectedIndex].text;
+            console.log(TipoMoneda);
+
+            //selectTipoTasa
+            var selectTT = document.getElementById('selectTipoTasa');
+            var TipoTasa = selectTT.options[selectTT.selectedIndex].text;
+            console.log(TipoTasa);
+            if(TipoTasa === 'Efectiva' || TipoTasa === '-'){
+                document.getElementById("frecuenciaC").disabled = true;
+            }else{document.getElementById("frecuenciaC").disabled = false;}
+//frecuenciaC
+            var FrecCapitalizacion = document.getElementById("frecuenciaC").value;
+            console.log(FrecCapitalizacion);
             var DiferenciaDias = NumDias();
             var DiasAño = 0;
+            var TipoPlaza = document.getElementById("selectTipoPlazo").value;
             var TasaEfectivaAnual = document.getElementById("TasaEfectivaAnual").value;
+//selectTipoPlazo
+            //Conversiones de Tasa Efectiva a Efectiva
+            if(TipoTasa === 'Efectiva') {
+                if (TipoPlaza == 1) {
+                    console.log('Diario');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(360/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 2) {
+                    console.log('Quincenal');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(24/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 3) {
+                    console.log('Mensual');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(12/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 4) {
+                    console.log('Bimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(6/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 5) {
+                    console.log('Trimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(4/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 6) {
+                    console.log('Cuatrimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(3/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 7) {
+                    console.log('Semestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual/100),(2/1))-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 8) {
+                    console.log('Anual');
+                    TasaEfectivaAnual = TasaEfectivaAnual * 1;
+                    console.log(TasaEfectivaAnual);
+                }
+            }else if(TipoTasa === 'Nominal'){
+                if (TipoPlaza == 1) {
+                    console.log('Diario');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*360)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 2) {
+                    console.log('Quincenal');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*24)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 3) {
+                    console.log('Mensual');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*12)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 4) {
+                    console.log('Bimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*6)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 5) {
+                    console.log('Trimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*4)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 6) {
+                    console.log('Cuatrimestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*3)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 7) {
+                    console.log('Semestral');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*2)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                } else if (TipoPlaza == 8) {
+                    console.log('Anual');
+                    TasaEfectivaAnual = (100*(Math.pow(1+(TasaEfectivaAnual*1)/(100*FrecCapitalizacion),FrecCapitalizacion/1)-1)).toFixed(8);
+                    console.log(TasaEfectivaAnual);
+                }
+            }
+
+
             var ValorNominal = document.getElementById("ValorNominal").value;
             var r = document.getElementById("selectTipoAño").value;
             if (r == 1) DiasAño = 360;
@@ -71,67 +159,18 @@
             console.log('ValorNeto: ', ValorNeto);
             //console.log('CostoGastoInicial: '+ TotalCostoGastoI);
             //console.log('CostoGastoFinal: '+ TotalCostoGastoF);
-            var ValorRecibido = ValorNeto - parseFloat(87.6);
+            var Retencion = document.getElementById("valorRetencion").value;
+            var TotalRetencion = parseFloat((Retencion/100 * ValorNominal));
+            console.log('Retencion',TotalRetencion);
+            var ValorRecibido = ValorNeto - parseFloat(205) - TotalRetencion;
             console.log("ValorRecibido",ValorRecibido);
-            var ValorEntregado = parseInt(ValorNominal) + parseFloat(0.70);
+            var ValorEntregado = parseInt(ValorNominal) + parseFloat(45) - TotalRetencion;
             console.log("ValorEntregado:",ValorEntregado);
             var TCEA = (Math.pow((ValorEntregado/ValorRecibido),(DiasAño/DiferenciaDias))-1);
-            document.getElementById("vtrds").innerHTML = ValorRecibido;
+            document.getElementById("vtrds").innerHTML = `${TipoMoneda} `+ValorRecibido.toFixed(2);
             document.getElementById("tceads").innerHTML = TCEA*100+'%';
         }
 
-        /*
-        if (diasaño === 1) {
-            console.log('360 dias');
-
-            function NumDiasOrdinario() {
-                var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
-                var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
-                var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
-                if (document.getElementById("FechaVencimientoID")) {
-                    //document.getElementById("tceads").innerHTML = ndias;
-                    //document.getElementById("numdays2").value=ndias;
-                    return ndias;
-                }
-            }
-        } else if (diasaño === 2) {
-
-            console.log('365 dias');
-
-            function NumDias() {
-                var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
-                var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
-                var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
-                if (document.getElementById("FechaVencimientoID")) {
-                    //document.getElementById("tceads").innerHTML = ndias;
-                    //document.getElementById("numdays2").value=ndias;
-                    return ndias;
-                }
-            }
-            var numerodias = NumDias();
-            //console.log(numerodias);
-            //var TEA = TasaEfectivaAnual();
-            var TEA = new Date(document.getElementById('TasaEfectivaAnual').value);
-            console.log(TEA);
-            function TE(NumeroDias, TasaEfectivaAnual) {
-                return (Math.pow((1 + (TasaEfectivaAnual / 100)), (NumeroDias / 365)) - 1);
-            }
-            var Te = TE(numerodias, TEA);
-            document.getElementById("tceads").innerHTML = Te;
-
-
-            //function TCEALetra() {
-            //    var totalTCEA = TE() + NumDias();
-            //    document.getElementById("tceads").innerHTML = totalTCEA;
-            //}
-
-            //console.log(Te);
-
-        } else {
-            console.log(':)');
-        }
-
-*/
     </script>
 </head>
 
@@ -171,7 +210,7 @@
 <section id="Letra">
 
     <div id="content" class="p-4 p-md-5 pt-5 mt-4">
-        <form method="POST" th:object="${letraForm}" th:action="@{/reportes}">
+        <form method="POST"  ><!--th:object="${letraForm}" th:action="@{/inicio}"-->
             <div class="container">
                 <h2 class="text-white">Bienvenido <span sec:authentication="name"></span></h2>
                 <hr class="style13" style="color: #eeeeee">
@@ -192,13 +231,16 @@
                                 </div>
                                 <div class="col">
                                     <input type="number" name="ValorNominal" id="ValorNominal" onchange="TipoAño()">
+                                    <!-- th:field="*{valorN}"-->
+                                    <!--<span class="has-error"th:if="${#fields.hasErrors('valorN')}" th:errors="*{valorN}"></span>-->
                                 </div>
 
                                 <div class="col-sm-2">
                                     <span class="badge badge-default" style="font-size: 22px">Tipo de Moneda</span>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" id="selectTipoMoneda">
+                                    <select class="form-select" id="selectTipoMoneda" onchange="TipoAño()">
+                                        <option value="0">-</option>
                                         <option value="1">S/.</option>
                                         <option value="2">$</option>
                                     </select>
@@ -220,9 +262,32 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tipo de Tasa</span>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" id="selectTipoTasa">
+                                    <select class="form-select" id="selectTipoTasa" onchange="TipoAño()">
+                                        <option value="0">-</option>
                                         <option value="1">Efectiva</option>
                                         <option value="2">Nominal</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fin primera fila-->
+                        <!--Primera fila-->
+                        <div class="row2 mt-3">
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <span class="badge badge-default" style="font-size: 22px">Frec. de Capitalización</span>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" id="frecuenciaC" onchange="TipoAño()" disabled="disabled">
+                                        <option value="0">-</option>
+                                        <option value="360">Diario</option>
+                                        <option value="24">Quincenal</option>
+                                        <option value="12">Mensual</option>
+                                        <option value="6">Bimestral</option>
+                                        <option value="4">Trimestral</option>
+                                        <option value="3">Cuatrimestral</option>
+                                        <option value="2">Semestral</option>
+                                        <option value="1">Anual</option>
                                     </select>
                                 </div>
                             </div>
@@ -254,7 +319,8 @@
                                     <span class="badge badge-default" style="font-size: 22px">Plazo de tasa</span>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" id="selectTipoPlazo">
+                                    <select class="form-select" id="selectTipoPlazo" onchange="TipoAño()">
+                                        <option value="0">-</option>
                                         <option value="1">Diario</option>
                                         <option value="2">Quincenal</option>
                                         <option value="3">Mensual</option>
@@ -309,7 +375,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Retención</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="fname" placeholder="1">
+                                    <input type="number" name="Retencion" id="valorRetencion" onchange="TipoAño()">
                                 </div>
 
                                 <div class="col-sm-3">
@@ -414,14 +480,14 @@
                                     <span class="badge badge-default"
                                           style="font-size: 22px">Valor Total a Recibir</span>
                                 </div>
-                                <div class="col">
+                                <div class="col-sm">
                                     <span class="badge badge-default" style="font-size: 22px" id="vtrds">...</span>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <span class="badge badge-default" style="font-size: 22px">TCEA</span>
                                 </div>
-                                <div class="col">
+                                <div class="col-sm">
                                     <span class="badge badge-default" style="font-size: 22px" id="tceads">...</span>
                                 </div>
                             </div>
