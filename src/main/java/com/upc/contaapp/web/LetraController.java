@@ -21,15 +21,18 @@ public class LetraController {
     @Autowired
     private LetraValidator letraValidator;
 
+    /*@GetMapping("inicio")
+    public String letraForm(Model model){
+        model.addAttribute("letra", new Letra());
+        return "letra";
+    }*/
 
     @PostMapping("/inicio")
-    public String addLetra(@ModelAttribute("letraForm") Letra letraForm, BindingResult bindingResult){
-        letraValidator.validate(letraForm,bindingResult);
-        if(bindingResult.hasErrors()){
-            return "inicio";
-        }
-        letraService.save(letraForm);
-        return "redirect:/reportes";
+    public String letraSubmit(@ModelAttribute("letra") Letra letra, Model model, BindingResult bindingResult){
+        letraValidator.validate(letra, bindingResult);
+        model.addAttribute("letra", letra);
+        letraService.save(letra);
+        return "inicio";
     }
 
 }

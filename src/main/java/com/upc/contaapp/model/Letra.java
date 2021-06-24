@@ -19,7 +19,10 @@ public class Letra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="tipoaño", nullable = false, length = 50)
+    @Column(name="tipomoneda", nullable = false, length = 50)
+    private String tipomoneda;
+
+    @Column(name="tipoanio", nullable = false, length = 50)
     private String typeOfYear;
 
     @Column(name="TEA", nullable = false)

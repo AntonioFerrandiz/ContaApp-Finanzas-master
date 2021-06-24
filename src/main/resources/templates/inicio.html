@@ -179,7 +179,7 @@
 <section id="Home">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top mb-2" style="background-color: #032e58;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">CONTA APP +</a>
+            <a class="navbar-brand" href="inicio" th:action="@{/inicio}">CONTA APP +</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -187,20 +187,23 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="inicio" th:action="@{/inicio}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Nosotros</a>
+                        <a class="nav-link" href="nosotros" th:action="@{/nosotros}">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1">Preguntas</a>
+                        <a class="nav-link" href="preguntas" th:action="@{/preguntas}" >Preguntas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reportes" th:action="@{/reportes}"  tabindex="-1">Reportes</a>
                     </li>
                 </ul>
                 <div sec:authorize="isAuthenticated()">
                     <form class="d-flex" id="logoutForm" method="POST" th:action="@{/logout}">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
-                    <a class="text-white nav-link" onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+                    <button class="btn btn-outline-danger" onclick="document.forms['logoutForm'].submit()">Logout</button>
                 </div>
             </div>
         </div>
@@ -210,7 +213,7 @@
 <section id="Letra">
 
     <div id="content" class="p-4 p-md-5 pt-5 mt-4">
-        <form method="POST"  ><!--th:object="${letraForm}" th:action="@{/inicio}"-->
+        <form th:action="@{/inicio}" th:object="${letra}" method="post"><!--th:object="${letraForm}" th:action="@{/inicio}"-->
             <div class="container">
                 <h2 class="text-white">Bienvenido <span sec:authentication="name"></span></h2>
                 <hr class="style13" style="color: #eeeeee">
@@ -230,7 +233,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Valor Nominal</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="ValorNominal" id="ValorNominal" onchange="TipoAño()">
+                                    <input type="number"  name="ValorNominal" id="ValorNominal" onchange="TipoAño()" >
                                     <!-- th:field="*{valorN}"-->
                                     <!--<span class="has-error"th:if="${#fields.hasErrors('valorN')}" th:errors="*{valorN}"></span>-->
                                 </div>
@@ -262,7 +265,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tipo de Tasa</span>
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" id="selectTipoTasa" onchange="TipoAño()">
+                                    <select class="form-select"  id="selectTipoTasa" onchange="TipoAño()">
                                         <option value="0">-</option>
                                         <option value="1">Efectiva</option>
                                         <option value="2">Nominal</option>

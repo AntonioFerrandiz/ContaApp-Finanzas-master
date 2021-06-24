@@ -55,7 +55,7 @@ public class UserValidator implements Validator {
 
         //PASSWORD
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 50) {
+        if (user.getPassword().length() < 8 || user.getPassword().length() > 100) {
             errors.rejectValue("password", "Size.userForm.password");
         }
 

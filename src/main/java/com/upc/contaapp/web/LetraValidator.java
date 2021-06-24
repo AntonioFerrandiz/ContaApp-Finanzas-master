@@ -18,6 +18,7 @@ public class LetraValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
+        /*
         Letra letra = (Letra) o;
         //Valor Nominal
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "valorN", "NotEmpty");
@@ -43,7 +44,7 @@ public class LetraValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gastoscostosf", "NotEmpty");
         if(letra.getValorN() <= 0){
             errors.rejectValue("gastoscostosf", "value.letraForm.gastoscostosf");
-        }
+        }*/
     }
 
 }
