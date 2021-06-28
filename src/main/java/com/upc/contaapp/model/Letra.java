@@ -19,55 +19,55 @@ public class Letra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="tipomoneda", nullable = false, length = 50)
+    @Column(name="tipomoneda", length = 50)
     private String tipomoneda;
 
-    @Column(name="tipoanio", nullable = false, length = 50)
+    @Column(name="tipoanio", length = 50)
     private String typeOfYear;
 
-    @Column(name="TEA", nullable = false)
+    @Column(name="TEA")
     private Double tea;
 
-    @Column(name="fechadescuento", nullable = false, length = 50)
+    @Column(name="fechadescuento", length = 50)
     @Temporal(TemporalType.DATE)
     private Date fechadscto;
 
     //Convertir a arreglo
-    @Column(name="GastosCostosIniciales", nullable = false, length = 50)
+    @Column(name="GastosCostosIniciales", length = 50)
     private Double gcIniciales;
 
-    @Column(name="GastosCostosFinales", nullable = false, length = 50)
+    @Column(name="GastosCostosFinales", length = 50)
     private Double gcFinales;
     //Lo de arriba tambien
 
-    @Column(name="fechavencimiento", nullable = false, length = 50)
+    @Column(name="fechavencimiento", length = 50)
     @Temporal(TemporalType.DATE)
     private Date fechavncto;
 
-    @Column(name="valornominal", nullable = false, length = 50)
+    @Column(name="valornominal", length = 50)
     private Double valorN;
 
     //Valores a calcular
 
-    @Column(name="numdias", nullable = false)
+    @Column(name="numdias")
     private Number numDias;
 
-    @Column(name="TEP", nullable = false)
+    @Column(name="TEP")
     private Double tep;
 
-    @Column(name="d", nullable = false)
+    @Column(name="d")
     private Double d;
 
-    @Column(name="valorneto", nullable = false)
+    @Column(name="valorneto")
     private Double valorNT;
 
-    @Column(name="valorRecibido", nullable = false)
+    @Column(name="valorRecibido")
     private Double valorR;
 
-    @Column(name="valorEntregado", nullable = false)
+    @Column(name="valorEntregado")
     private Double valorE;
 
-    @Column(name="TCEA", nullable = false)
+    @Column(name="TCEA")
     private Double tcea;
 
 
