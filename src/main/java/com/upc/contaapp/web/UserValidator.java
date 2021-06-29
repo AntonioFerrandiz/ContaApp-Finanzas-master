@@ -27,32 +27,48 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "NotEmpty");
         //LASTNAME
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "NotEmpty");
+
         //DNI
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "NotEmpty");
         if (user.getDni().length() != 8) {
             errors.rejectValue("dni", "Size.userForm.dni");
         }
+        if (userService.findByUsername(user.getDni()) != null) {
+            errors.rejectValue("dni", "Duplicate.userForm.dni");
+        }
+
         //EMAIL
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(user.getEmail());
         mather.find();
+        if (userService.findByUsername(user.getEmail()) != null) {
+            errors.rejectValue("email", "Duplicate.userForm.email");
+        }
 
         //SOCIALREASONNAME
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "socialreasonname", "NotEmpty");
+        if (user.getSocialreasonname().length() > 250) {
+            errors.rejectValue("socialreasonname", "Size.userForm.socialreasonname");
+        }
 
         //COMPANYRUC
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "company_ruc", "NotEmpty");
         if (user.getCompany_ruc().length() != 11) {
             errors.rejectValue("company_ruc", "Size.userForm.ruc");
         }
+        if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("ruc", "Duplicate.userForm.ruc");
+        }
 
         //USERNAME
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getUsername().length() < 6 || user.getUsername().length() > 50) {
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 250) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-
+        if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("username", "Duplicate.userForm.username");
+        }
         //PASSWORD
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
         if (user.getPassword().length() < 8 || user.getPassword().length() > 100) {

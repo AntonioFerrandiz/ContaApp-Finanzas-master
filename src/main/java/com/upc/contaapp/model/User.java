@@ -15,20 +15,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="username", nullable = false, length = 50, unique = true)
+    @Column(name="username", nullable = false, length = 100, unique = true)
     private String username;
 
-    @Column(name="password", nullable = false, length = 50, unique = false)
+    @Column(name="password", nullable = false, length = 100, unique = false)
     private String password;
 
     @Transient
     @Column(name="password", nullable = false, length = 100, unique = false)
     private String passwordConfirm;
 
-    @Column(name="firstname", nullable = false, length = 50)
+    @Column(name="firstname", nullable = false, length = 100)
     private String firstname;
 
-    @Column(name="lastname", nullable = false, length = 50)
+    @Column(name="lastname", nullable = false, length = 100)
     private String lastname;
 
     @Column(name="dni", nullable = false, unique = true, length = 8)
