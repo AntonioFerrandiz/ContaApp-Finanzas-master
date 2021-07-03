@@ -51,8 +51,8 @@ public class User {
     private String socialreasonname;
 
     @NotNull(message = "Name cannot be null")
-    @Column(name="company_ruc", nullable = false, length = 11)
-    private String company_ruc;
+    @Column(name="companyruc", nullable = false, length = 11)
+    private String companyruc;
 
     @ManyToMany
     private Set<Role> roles;

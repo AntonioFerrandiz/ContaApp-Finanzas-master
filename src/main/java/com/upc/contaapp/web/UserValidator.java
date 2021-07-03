@@ -30,20 +30,19 @@ public class UserValidator implements Validator {
 
         //DNI
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "NotEmpty");
+        if (userService.findByDni(user.getDni()) != null) {
+            errors.rejectValue("dni", "Duplicate.userForm.dni");
+        }
 
         if (user.getDni().length() != 8) {
             errors.rejectValue("dni", "Size.userForm.dni");
         }
-        if (userService.findByUsername(user.getDni()) != null) {
-            errors.rejectValue("dni", "Duplicate.userForm.dni");
-        }
-
         //EMAIL
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(user.getEmail());
         mather.find();
-        if (userService.findByUsername(user.getEmail()) != null) {
+        if (userService.findByEmail(user.getEmail()) != null) {
             errors.rejectValue("email", "Duplicate.userForm.email");
         }
 
@@ -52,13 +51,14 @@ public class UserValidator implements Validator {
 
 
         //COMPANYRUC
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "company_ruc", "NotEmpty");
-        if (user.getCompany_ruc().length() != 11) {
-            errors.rejectValue("company_ruc", "Size.userForm.ruc");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyruc", "NotEmpty");
+        if (userService.findByCompanyruc(user.getCompanyruc()) != null) {
+            errors.rejectValue("companyruc", "Duplicate.userForm.companyruc");
         }
-        if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("company_ruc", "Duplicate.userForm.ruc");
+        if (user.getCompanyruc().length() != 11) {
+            errors.rejectValue("companyruc", "Size.userForm.companyruc");
         }
+
 
         //USERNAME
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
