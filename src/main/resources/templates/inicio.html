@@ -29,9 +29,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="nosotros" th:action="@{/nosotros}">Nosotros</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reportes" th:action="@{/reportes}"  tabindex="-1">Reportes</a>
-                    </li>
                 </ul>
                 <div sec:authorize="isAuthenticated()">
                     <form class="d-flex" id="logoutForm" method="POST" th:action="@{/logout}">
@@ -344,7 +341,6 @@
             </div>
             <!--Fin de la linea entre los rectangulos-->
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar Letra</button>
         </form>
         <!--Final de Costos Gastos Finales-->
     </div>
