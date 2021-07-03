@@ -64,7 +64,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Valor Nominal</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number"  name="ValorNominal" id="ValorNominal" onchange="Calcular()" >
+                                    <input type="number"  name="ValorNominal" id="ValorNominal" onchange="Calcular()"step="any" >
                                     <span class="has-error text-danger" id="eValorNominal"></span>
                                 </div>
 
@@ -180,7 +180,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Tasa efectiva</span>
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="fname" id="TasaEfectivaAnual" onchange="Calcular()">
+                                    <input type="number" name="fname" id="TasaEfectivaAnual" onchange="Calcular()" step="any">
                                     <span class="has-error text-danger" id="eTasaEfectivaAnual"></span>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Costo-Gasto</span>
                                 </div>
                                 <div class="col-sm-auto">
-                                    <input type="number" name="CostoGastoInicial" id="CostoGastoInicial">
+                                    <input type="number" name="CostoGastoInicial" id="CostoGastoInicial" step="any">
                                 </div>
                                 <div class="col-sm-auto">
                                     <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Inicial agregado')">Agregar</button>
@@ -295,7 +295,7 @@
                                     <span class="badge badge-default" style="font-size: 22px">Costo-Gasto</span>
                                 </div>
                                 <div class="col-sm-auto">
-                                    <input type="number" name="CostoGastoFinal" id="CostoGastoFinal">
+                                    <input type="number" name="CostoGastoFinal" id="CostoGastoFinal" step="any">
                                 </div>
                                 <div class="col-sm-auto">
                                     <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Final agregado')">Agregar</button>
