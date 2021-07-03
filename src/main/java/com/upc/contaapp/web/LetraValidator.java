@@ -18,33 +18,18 @@ public class LetraValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-        /*
-        Letra letra = (Letra) o;
-        //Valor Nominal
+       Letra letra = (Letra) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "valorN", "NotEmpty");
-        if(letra.getValorN() <= 0){
-            errors.rejectValue("valorN", "value.letraForm.valorN");
-        }
-        //Tasa Efectiva
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tasaefectiva", "NotEmpty");
-        if(letra.getValorN() <= 0){
-            errors.rejectValue("tasaefectiva", "value.letraForm.tasaefectiva");
-        }
-        //Retención
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tea", "NotEmpty");
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "retencion", "NotEmpty");
-        if(letra.getValorN() <= 0){
-            errors.rejectValue("retencion", "value.letraForm.retencion");
-        }
-        //Gastos Costos Iniciales
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gastoscostosi", "NotEmpty");
-        if(letra.getValorN() <= 0){
-            errors.rejectValue("gastoscostosi", "value.letraForm.gastoscostosi");
-        }
-        //Gastos Costos Finales
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gastoscostosf", "NotEmpty");
-        if(letra.getValorN() <= 0){
-            errors.rejectValue("gastoscostosf", "value.letraForm.gastoscostosf");
-        }*/
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cgi", "NotEmpty");
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cff", "NotEmpty");
+
+
     }
 
 }

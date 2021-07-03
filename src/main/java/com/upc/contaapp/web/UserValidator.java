@@ -30,6 +30,7 @@ public class UserValidator implements Validator {
 
         //DNI
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "NotEmpty");
+
         if (user.getDni().length() != 8) {
             errors.rejectValue("dni", "Size.userForm.dni");
         }
@@ -48,9 +49,7 @@ public class UserValidator implements Validator {
 
         //SOCIALREASONNAME
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "socialreasonname", "NotEmpty");
-        if (user.getSocialreasonname().length() > 250) {
-            errors.rejectValue("socialreasonname", "Size.userForm.socialreasonname");
-        }
+
 
         //COMPANYRUC
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "company_ruc", "NotEmpty");
@@ -58,7 +57,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("company_ruc", "Size.userForm.ruc");
         }
         if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("ruc", "Duplicate.userForm.ruc");
+            errors.rejectValue("company_ruc", "Duplicate.userForm.ruc");
         }
 
         //USERNAME

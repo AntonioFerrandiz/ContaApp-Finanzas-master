@@ -30,9 +30,6 @@
                         <a class="nav-link" href="nosotros" th:action="@{/nosotros}">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="preguntas" th:action="@{/preguntas}" >Preguntas</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="reportes" th:action="@{/reportes}"  tabindex="-1">Reportes</a>
                     </li>
                 </ul>
@@ -258,13 +255,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row2 mt-">
+                            <div class="form-group row">
+                                <div class="col-sm-auto">
+                                    <span id="textoCGI" class="text-success "></span>
+                                </div>
+                            </div>
+                        </div>
                         <!--Fin segunda fila-->
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <textarea class="form-control" aria-label="With textarea" readonly="readonly"
-                                          id="textareainiciales" style="resize: none"></textarea>
-
                             </div>
                         </div>
                         <!--Fin tercera fila-->
@@ -293,7 +294,14 @@
                                     <input type="number" name="CostoGastoFinal" id="CostoGastoFinal">
                                 </div>
                                 <div class="col-sm-auto">
-                                        <button type="button" class="btn btn-success btn-md" onclick="Calcular()">Agregar</button>
+                                    <button type="button" class="btn btn-success btn-md" onclick="Calcular()">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row2 mt-">
+                            <div class="form-group row">
+                                <div class="col-sm-auto">
+                                    <span id="textoCGF" class="text-success "></span>
                                 </div>
                             </div>
                         </div>
@@ -301,8 +309,6 @@
                         <!--Tercera fila-->
                         <div class="row align-items-center">
                             <div class="col ">
-                                <textarea class="form-control" aria-label="With textarea" readonly="readonly"
-                                          id="textareafinales" style="resize: none" ></textarea>
                             </div>
                         </div>
                         <!--Fin tercera fila-->

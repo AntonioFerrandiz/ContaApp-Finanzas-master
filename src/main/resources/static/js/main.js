@@ -50,10 +50,13 @@ function CostoGastoFinal() {
 }
 
 function Calcular() {
-
+//, document.getElementById('textoCGF').innerHTML ='Costo/Gasto Final agregado.'
+    //, document.getElementById('textoCGI').innerHTML ='Costo/Gasto Inicial agregado.'
     //COSTOS/GASTOS
     var TotalCostoGastoI = document.getElementById("CostoGastoInicial").value;
+    document.getElementById('CostoGastoInicial').value = '';
     var TotalCostoGastoF = document.getElementById("CostoGastoFinal").value;
+    document.getElementById('CostoGastoFinal').value = '';
 
     //TIPO DE MONEDA $ o S/.
     var select = document.getElementById('selectTipoMoneda');
