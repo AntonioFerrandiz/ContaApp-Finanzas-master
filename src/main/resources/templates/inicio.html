@@ -68,8 +68,6 @@
                                 </div>
                                 <div class="col">
                                     <input type="number"  name="ValorNominal" id="ValorNominal" onchange="Calcular()" >
-                                    <!-- th:field="*{valorN}"-->
-                                    <!--<span class="has-error"th:if="${#fields.hasErrors('valorN')}" th:errors="*{valorN}"></span>-->
                                 </div>
 
                                 <div class="col-sm-2">
@@ -251,7 +249,7 @@
                                     <input type="number" name="CostoGastoInicial" id="CostoGastoInicial">
                                 </div>
                                 <div class="col-sm-auto">
-                                    <button type="button" class="btn btn-success btn-md" onclick="Calcular()">Agregar</button>
+                                    <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Inicial agregado')">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -294,7 +292,9 @@
                                     <input type="number" name="CostoGastoFinal" id="CostoGastoFinal">
                                 </div>
                                 <div class="col-sm-auto">
-                                    <button type="button" class="btn btn-success btn-md" onclick="Calcular()">Agregar</button>
+                                    <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Final agregado')">Agregar</button>
+
+
                                 </div>
                             </div>
                         </div>

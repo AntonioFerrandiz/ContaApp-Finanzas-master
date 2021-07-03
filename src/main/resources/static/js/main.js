@@ -54,9 +54,9 @@ function Calcular() {
     //, document.getElementById('textoCGI').innerHTML ='Costo/Gasto Inicial agregado.'
     //COSTOS/GASTOS
     var TotalCostoGastoI = document.getElementById("CostoGastoInicial").value;
-    document.getElementById('CostoGastoInicial').value = '';
+
     var TotalCostoGastoF = document.getElementById("CostoGastoFinal").value;
-    document.getElementById('CostoGastoFinal').value = '';
+
 
     //TIPO DE MONEDA $ o S/.
     var select = document.getElementById('selectTipoMoneda');
@@ -212,5 +212,7 @@ function Calcular() {
     //RESULTADOS FINALES
     document.getElementById("vtrds").innerHTML = /* -n-  -->*/ `${TipoMoneda} ` + ValorRecibido.toFixed(2);
     document.getElementById("tceads").innerHTML = TCEA * 100 + '%';
+
+
 }
 
