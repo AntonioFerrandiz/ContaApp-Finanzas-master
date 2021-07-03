@@ -21,13 +21,6 @@ public class LetraValidator implements Validator{
        Letra letra = (Letra) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "valorN", "NotEmpty");
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tea", "NotEmpty");
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "retencion", "NotEmpty");
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cgi", "NotEmpty");
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cff", "NotEmpty");
 
 
     }

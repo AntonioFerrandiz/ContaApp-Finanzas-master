@@ -44,7 +44,7 @@
 <section id="Letra">
 
     <div id="content" class="p-4 p-md-5 pt-5 mt-4">
-        <form th:action="@{/inicio}" th:object="${letra}" method="post"><!--th:object="${letraForm}" th:action="@{/inicio}"-->
+        <form name="letraForm", onsubmit="return validateForm()" required>
             <div class="container">
                 <h2 class="text-white">Bienvenido <span sec:authentication="name"></span></h2>
                 <hr class="style13" style="color: #eeeeee">
@@ -65,6 +65,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="number"  name="ValorNominal" id="ValorNominal" onchange="Calcular()" >
+                                    <span class="has-error text-danger" id="eValorNominal"></span>
                                 </div>
 
                                 <div class="col-sm-2">
@@ -76,6 +77,7 @@
                                         <option value="1">S/.</option>
                                         <option value="2">$</option>
                                     </select>
+                                    <span class="has-error text-danger" id="eTipoMoneda"></span>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +101,7 @@
                                         <option value="1">Efectiva</option>
                                         <option value="2">Nominal</option>
                                     </select>
+                                    <span class="has-error text-danger" id="eTipoTasa"></span>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +124,7 @@
                                         <option value="2">Semestral</option>
                                         <option value="1">Anual</option>
                                     </select>
+                                    <span class="has-error text-danger" id="eFrecuencia"></span>
                                 </div>
                             </div>
                         </div>
@@ -139,6 +143,7 @@
                                         <option value="1">360 dias</option>
                                         <option value="2">365 dias</option>
                                     </select>
+                                    <span class="has-error text-danger" id="eTipoAño"></span>
                                 </div>
                             </div>
                         </div>
@@ -162,6 +167,7 @@
                                         <option value="7">Semestral</option>
                                         <option value="8">Anual</option>
                                     </select>
+                                    <span class="has-error text-danger" id="eTipoPlazo"></span>
                                 </div>
                             </div>
                         </div>
@@ -175,6 +181,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="number" name="fname" id="TasaEfectivaAnual" onchange="Calcular()">
+                                    <span class="has-error text-danger" id="eTasaEfectivaAnual"></span>
                                 </div>
                             </div>
 
@@ -208,6 +215,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="number" name="Retencion" id="valorRetencion" onchange="Calcular()">
+                                    <span class="has-error text-danger" id="eValorRetencion"></span>
                                 </div>
 
                                 <div class="col-sm-3">
@@ -247,6 +255,7 @@
                                 </div>
                                 <div class="col-sm-auto">
                                     <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Inicial agregado')">Agregar</button>
+                                    <span class="has-error text-danger" id="eCostoGastoInicial"></span>
                                 </div>
                             </div>
                         </div>
@@ -290,6 +299,7 @@
                                 </div>
                                 <div class="col-sm-auto">
                                     <button type="button" class="btn btn-success btn-md" onclick="Calcular(), alert('Costo/Gastos Final agregado')">Agregar</button>
+                                    <span class="has-error text-danger" id="eCostoGastoFinal"></span>
 
 
                                 </div>
@@ -340,7 +350,7 @@
                 </div>
             </div>
             <!--Fin de la linea entre los rectangulos-->
-
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Letra()">Agregar Letra</button>
         </form>
         <!--Final de Costos Gastos Finales-->
     </div>
@@ -363,6 +373,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 <script src="/js/main.js"></script>
+<script src="/js/validate.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>

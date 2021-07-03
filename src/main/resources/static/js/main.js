@@ -7,6 +7,10 @@ function NumDias() {
     var FechaVencimiento = new Date(document.getElementById('FechaVencimientoID').value);
     var FechaDescuento = new Date(document.getElementById('FechaDescuentoID').value);
     var ndias = parseInt((FechaVencimiento - FechaDescuento) / (24 * 3600 * 1000));
+    if(ndias <= 0){
+        alert("Ingrese correctamente las Fechas");
+    }
+
     if (document.getElementById("FechaVencimientoID")) {
         return ndias;
     }
@@ -210,9 +214,19 @@ function Calcular() {
     var TCEA = (Math.pow((ValorEntregado / ValorRecibido), (DiasAño / DiferenciaDias)) - 1);
 
     //RESULTADOS FINALES
-    document.getElementById("vtrds").innerHTML = /* -n-  -->*/ `${TipoMoneda} ` + ValorRecibido.toFixed(2);
-    document.getElementById("tceads").innerHTML = TCEA * 100 + '%';
+    if(isNaN(ValorRecibido)){
+        document.getElementById("vtrds").innerHTML = '...';
+    }else{
+        document.getElementById("vtrds").innerHTML = `${TipoMoneda} ` + ValorRecibido.toFixed(2);
+    }
+    if(isNaN(TCEA)){
+        document.getElementById("tceads").innerHTML = '...';
+    }else{
+        document.getElementById("tceads").innerHTML = TCEA * 100 + '%';
+    }
+
 
 
 }
+
 

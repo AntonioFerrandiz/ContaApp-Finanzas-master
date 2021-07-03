@@ -1,6 +1,7 @@
 package com.upc.contaapp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Letra {
     @Column(name="tipoanio", length = 50)
     private String typeOfYear;
 
+    @NotNull
     @Column(name="TEA")
     private Double tea;
 
@@ -32,18 +34,20 @@ public class Letra {
     @Temporal(TemporalType.DATE)
     private Date fechadscto;
 
-    //Convertir a arreglo
+    @NotNull
     @Column(name="GastosCostosIniciales", length = 50)
     private Double gcIniciales;
 
+    @NotNull
     @Column(name="GastosCostosFinales", length = 50)
     private Double gcFinales;
-    //Lo de arriba tambien
+
 
     @Column(name="fechavencimiento", length = 50)
     @Temporal(TemporalType.DATE)
     private Date fechavncto;
 
+    @NotNull
     @Column(name="valornominal", length = 50)
     private Double valorN;
 
